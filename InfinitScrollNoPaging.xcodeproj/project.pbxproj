@@ -13,6 +13,7 @@
 		4BF3A11A1B5FF59100565CB7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4BF3A1191B5FF59100565CB7 /* Images.xcassets */; };
 		4BF3A11D1B5FF59100565CB7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BF3A11B1B5FF59100565CB7 /* LaunchScreen.xib */; };
 		4BF3A1291B5FF59200565CB7 /* InfinitScrollNoPagingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF3A1281B5FF59200565CB7 /* InfinitScrollNoPagingTests.swift */; };
+		4BF3A1331B5FF5EB00565CB7 /* InfinitScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF3A1321B5FF5EB00565CB7 /* InfinitScrollView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		4BF3A1221B5FF59200565CB7 /* InfinitScrollNoPagingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InfinitScrollNoPagingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BF3A1271B5FF59200565CB7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4BF3A1281B5FF59200565CB7 /* InfinitScrollNoPagingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfinitScrollNoPagingTests.swift; sourceTree = "<group>"; };
+		4BF3A1321B5FF5EB00565CB7 /* InfinitScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InfinitScrollView.swift; path = Lib/InfinitScrollView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				4BF3A1191B5FF59100565CB7 /* Images.xcassets */,
 				4BF3A11B1B5FF59100565CB7 /* LaunchScreen.xib */,
 				4BF3A1101B5FF59100565CB7 /* Supporting Files */,
+				4BF3A1321B5FF5EB00565CB7 /* InfinitScrollView.swift */,
 			);
 			path = InfinitScrollNoPaging;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 			files = (
 				4BF3A1151B5FF59100565CB7 /* ViewController.swift in Sources */,
 				4BF3A1131B5FF59100565CB7 /* AppDelegate.swift in Sources */,
+				4BF3A1331B5FF5EB00565CB7 /* InfinitScrollView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
