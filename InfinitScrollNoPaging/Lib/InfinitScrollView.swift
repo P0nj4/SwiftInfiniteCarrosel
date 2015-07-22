@@ -36,6 +36,10 @@ class InfinitScrollView: UIView {
     private var itemWidth : Float!
     private var startingPoint : CGFloat!
     private var endingPoint : CGFloat!
+    private var fakeEndingPoint : CGFloat!
+    private var itemsLength : CGFloat!
+    private var secondLoop: Bool = false
+    
     var delegate: InfinitScrollViewDelegate!
     
     init(frame: CGRect, datasource: Array<AnyObject>, itemWidth: Float, delegate: InfinitScrollViewDelegate) {
@@ -45,6 +49,8 @@ class InfinitScrollView: UIView {
         self.itemsCount = self.datasource.count;
         self.startingPoint = CGFloat(self.itemWidth * Float(self.itemsCount));
         self.endingPoint = CGFloat((self.itemWidth * Float(self.itemsCount)) * Float(2));
+        self.fakeEndingPoint = self.endingPoint;
+        self.itemsLength = CGFloat(self.itemWidth * Float(self.itemsCount));
         self.delegate = delegate;
         scroll.frame = self.bounds
         scroll.delegate = self;
@@ -93,23 +99,49 @@ extension InfinitScrollView : UIScrollViewDelegate {
         self.scroll.userInteractionEnabled = true
         if (self.scroll.contentOffset.x > self.endingPoint) {
             self.scroll.contentOffset = CGPoint(x: self.scroll.contentOffset.x - CGFloat(self.itemWidth * Float(self.itemsCount)), y: 0)
+            self.scroll.contentSize = CGSizeMake(CGFloat(self.itemWidth * Float(self.itemsCount) * 3), CGFloat(self.scroll.bounds.size.height))
         }
         if (self.scroll.contentOffset.x < self.startingPoint) {
             self.scroll.contentOffset = CGPoint(x: self.scroll.contentOffset.x + CGFloat(self.itemWidth * Float(self.itemsCount)), y: 0)
+            self.scroll.contentSize = CGSizeMake(CGFloat(self.itemWidth * Float(self.itemsCount) * 3), CGFloat(self.scroll.bounds.size.height))
         }
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        if !scrollView.decelerating {
-            self.scroll.userInteractionEnabled = true
+        if scrollView.contentOffset.x > self.fakeEndingPoint {
+            moveItemsToRight()
         }
+    }
+    
+    func moveItemsToRight () {
+        
+        if (!secondLoop) {
+            secondLoop = true;
+        } else
+        {
+            print ("aca");
+        }
+        
+        var allViewsInScroll = Array(self.scroll.subviews)
+        allViewsInScroll.sort({$0.frame.origin.x < $1.frame.origin.x })
+        
+        var i = 0
+        var leftXPos = self.scroll.contentSize.width
+        var movedItems = 0
+        while movedItems < self.itemsCount {
+            if let item = allViewsInScroll[i] as? InfiniteScrollItemView {
+                item.frame = CGRect(x: leftXPos, y: item.frame.origin.y, width: item.frame.size.width, height: item.frame.size.height)
+                leftXPos += item.frame.size.width;
+                movedItems++;
+            }
+            i++;
+        }
+        self.scroll.contentSize = CGSize(width: self.scroll.contentSize.width + self.itemsLength, height: self.scroll.contentSize.height);
+        self.fakeEndingPoint = self.fakeEndingPoint + self.itemsLength;
     }
     
     func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         print("isDecelerating: \(scrollView.decelerating) velocity: \(velocity)")
-        if velocity.x != 0 {
-            //self.scroll.userInteractionEnabled = false
-        }
     }
     
 }
